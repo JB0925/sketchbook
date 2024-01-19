@@ -45,3 +45,15 @@ body {
   height: 100vh;
 
 }
+
+
+
+
+
+@font-face {
+  font-family: 'handwriting';
+  src: local('handwriting'), url(./fonts/handwriting.ttf) format('truetype');
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+  font-display: swap;
+}

@@ -148,6 +148,7 @@ const Sketchbook = () => {
     editor.canvas.renderAll();
   };
 
+
   const addText = () => {
     console.log("Adding Circle...");
     const fabricText = new fabric.IText('Hello, Fabric.js!', {
@@ -156,7 +157,7 @@ const Sketchbook = () => {
           top: window.innerHeight/2,
 
       fill: 'black',
-      fontFamily: 'Arial',
+      fontFamily: 'handwriting',
 
       borderColor: 'black',
       cornerColor: 'black'
