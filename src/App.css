@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  height: 100vh;
 }
 
 .App-logo {
@@ -14,6 +15,8 @@
 }
 
 .App-header {
+  background-image: url(./imgs/lined-paper.png);
+
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -35,4 +38,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  background-image: url(./imgs/lined-paper.png);
+  height: 100vh;
+
 }

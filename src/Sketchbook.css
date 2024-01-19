@@ -1,0 +1,29 @@
+/* Sketchbook.css */
+
+.sketchbook-container {
+
+  }
+  
+
+  .sketchbook-canvas {
+    border: 1px solid #ccc;
+    margin-top: -10px; /* Adjust the margin as needed */
+    margin-bottom: -10px;
+  }
+
+
+    
+  .sketchbook-canvas::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-image: url('./imgs/PaperTear-2.png'); 
+    background-repeat: repeat-x;
+    background-position-y: 30px;
+    pointer-events: none; /* Allow click-through to buttons */
+    z-index: 10;
+  }
+  
