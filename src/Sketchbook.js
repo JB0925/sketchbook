@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
+
+import { useParams } from 'react-router-dom';
 import { FabricJSCanvas, useFabricJSEditor } from 'fabricjs-react';
 import Navigation from './Navigation';
 import StickyNote from './StickyNote';
@@ -8,6 +10,8 @@ import PaperClip from './PaperClip';
 import ControlPanel from './ControlPanel';
 import { fabric } from 'fabric';
 import imgPencil from './imgs/Pencil.png';
+import imgPaperClip from './imgs/Paperclip.png';
+import imgEraser from './imgs/Eraser.png';
 import DrawingCanvasApi from './api';
 
 // import styled from "styled-components";
@@ -64,32 +68,20 @@ const Sketchbook = () => {
   };
 
   const addPaperclip = () => {
-    console.log("Adding Paperclip...");
-    addComponent(PaperClip);
-  };
-
-  const addPencil = () => {
-    console.log("Adding Pencil...");
-    addComponent(Pencil);
-  };
-
-  const addEraser = () => {
-    console.log("Adding Eraser...");
-    addComponent(Eraser);
-  };
-
-  const addPenImage = () => {
     console.log("Adding Pen Image...");
-    // Assuming that Pencil is an Image, otherwise, you may need to adjust this part
-    const imgUrl = imgPencil;
+    const imgUrl = imgPaperClip;
+    const randomLeft = Math.floor(Math.random() * (window.innerWidth + 200) - 200);
+    const randomTop = Math.floor(Math.random() * (window.innerHeight - 30) +30)
+    const randomAngle = Math.floor(Math.random() * 360);
+    
       fabric.Image.fromURL(imgUrl, (img) => {
         img.set({
 
-          left: -200,
-          top: window.innerHeight/100,
-          angle:10,
-          scaleX: 0.5,
-          scaleY: 0.5,
+          left: randomLeft,
+          top: randomTop,
+          angle: randomAngle,
+          scaleX: 0.15,
+          scaleY: 0.15,
 
           shadow: {
             color: 'rgba(0, 0, 0, 0.5)', // Shadow color
@@ -105,6 +97,84 @@ const Sketchbook = () => {
           transparentCorners: true, // Ensure transparent corners
           padding: 0, // Remove padding around the object
           borderDashArray: [3, 3], // Optionally add a dash array to the border (dashed border)
+     
+        });
+        editor.canvas.add(img);
+        editor.canvas.setActiveObject(img);
+        editor.canvas.renderAll();
+      });
+    };
+
+
+
+    const addEraser = () => {
+      console.log("Adding Pen Image...");
+      const imgUrl = imgEraser;
+      const randomLeft = Math.floor(Math.random() * (window.innerWidth + 200) - 200);
+      const randomTop = Math.floor(Math.random() * (window.innerHeight - 30) +30)
+      const randomAngle = Math.floor(Math.random() * 360);
+
+        fabric.Image.fromURL(imgUrl, (img) => {
+          img.set({
+  
+            left: randomLeft,
+            top: randomTop,
+            angle: randomAngle,
+            scaleX: 0.16,
+            scaleY: 0.16,
+  
+            shadow: {
+              color: 'rgba(0, 0, 0, 0.5)', // Shadow color
+              blur: 20, // Shadow blur
+              offsetX: 15, // Horizontal offset of the shadow
+              offsetY: 15, // Vertical offset of the shadow
+            },
+  
+            borderColor: 'transparent', // Make border invisible
+            cornerColor: 'transparent', // Make corner invisible
+            cornerStrokeColor: 'transparent', // Make corner stroke invisible
+            cornerStyle: 'invisible', // Hide corner altogether
+            transparentCorners: true, // Ensure transparent corners
+            padding: 0, // Remove padding around the object
+            borderDashArray: [3, 3], // Optionally add a dash array to the border (dashed border)
+       
+          });
+          editor.canvas.add(img);
+          editor.canvas.setActiveObject(img);
+          editor.canvas.renderAll();
+        });
+      };
+
+  const addPencil = () => {
+    console.log("Adding Pencil Image...");
+    const imgUrl = imgPencil;
+    const randomLeft = Math.floor(Math.random() * (window.innerWidth + 200) - 200);
+    const randomTop = Math.floor(Math.random() * (window.innerHeight - 30) +30)
+    const randomAngle = Math.floor(Math.random() * 360);
+
+      fabric.Image.fromURL(imgUrl, (img) => {
+        img.set({
+
+          left: randomLeft,
+          top: randomTop,
+          angle: randomAngle,
+          scaleX: 0.4,
+          scaleY: 0.4,
+
+          shadow: {
+            color: 'rgba(0, 0, 0, 0.5)', 
+            blur: 20, 
+            offsetX: 15, 
+            offsetY: 15,
+          },
+
+          borderColor: 'transparent', // Make border invisible
+          cornerColor: 'transparent', // Make corner invisible
+          cornerStrokeColor: 'transparent', // Make corner stroke invisible
+          cornerStyle: 'invisible', // Hide corner altogether
+          transparentCorners: true, // Ensure transparent corners
+          padding: 0, // Remove padding around the object
+          borderDashArray: [3, 3], 
      
         });
 
@@ -159,7 +229,6 @@ const Sketchbook = () => {
 
       fill: 'black',
       fontFamily: 'handwriting',
-
       borderColor: 'black',
       cornerColor: 'black'
     
@@ -225,7 +294,7 @@ const Sketchbook = () => {
                     case 'path':
                       object.stroke = object.stroke || 'black'; // Set default stroke
                       break;
-                    // Add more cases for other object types as needed
+                
                     default:
                       break;
                   }
@@ -285,6 +354,11 @@ const Sketchbook = () => {
       editor.canvas.clear();
   }
 
+
+
+
+
+
   return (
     <div className='sketchbook-container'>
       <Navigation
@@ -292,10 +366,10 @@ const Sketchbook = () => {
         onAddPencil={addPencil}
         onAddPaperclip={addPaperclip}
         onAddEraser={addEraser}
-        onAddCircle={addCircle}
+        onAddCircle={addCircle} 
         onAddSquare={addSquare}
         onAddText={addText}
-        onAddPenImage={addPenImage}
+        // onAddPenImage={addPenImage}
         onToggleDrawingMode={toggleDrawingMode}
         onSaveCanvas={saveCanvas}
         onRandomCanvas={getRandomCanvas}
@@ -308,7 +382,7 @@ const Sketchbook = () => {
         onAddPaperclip={addPaperclip}
         onAddEraser={addEraser}
         onAddCircle={addCircle}
-        onAddPenImage={addPenImage}
+        // onAddPenImage={addPenImage}
         onToggleDrawingMode={toggleDrawingMode}
         onSaveCanvas={saveCanvas}
         onRandomCanvas={getRandomCanvas}

@@ -12,7 +12,7 @@ const Navigation = ({ onAddStickyNote, onAddPencil, onAddPaperclip, onAddEraser,
       <button className="button text" onClick={onAddText}>Add Text</button>
       <button className="button circle" onClick={onAddCircle}>Add Circle</button>
       <button className="button square" onClick={onAddSquare}>Add Square</button>
-      <button className="button pen-image" onClick={onAddPenImage}>Add Pen Image</button>
+      {/* <button className="button pen-image" onClick={onAddPenImage}>Add Pen Image</button> */}
       <button className="button toggle-drawing" onClick={onToggleDrawingMode}> Toggle Drawing Mode </button>
       {/* <button className="button save" onClick={onSaveCanvas}> Save Canvas </button>
       <button className="button random" onClick={onRandomCanvas}> Random Canvas </button>
