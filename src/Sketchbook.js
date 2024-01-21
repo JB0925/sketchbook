@@ -8,6 +8,7 @@ import PaperClip from './PaperClip';
 import ControlPanel from './ControlPanel';
 import { fabric } from 'fabric';
 import imgPencil from './imgs/Pencil.png';
+import DrawingCanvasApi from './api';
 
 // import styled from "styled-components";
 
@@ -31,8 +32,8 @@ const Sketchbook = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setCanvasSize({ width: window.innerWidth, height: window.innerHeight-100 });
-      updateCanvasSize(window.innerWidth, window.innerHeight-100);
+      setCanvasSize({ width: window.innerWidth, height: window.innerHeight-30 });
+      updateCanvasSize(window.innerWidth, window.innerHeight-30);
     };
 
     window.addEventListener('resize', handleResize);
@@ -43,7 +44,7 @@ const Sketchbook = () => {
   }, [editor, updateCanvasSize]);
 
   useEffect(() => {
-    updateCanvasSize(canvasSize.width, canvasSize.height);
+    updateCanvasSize(canvasSize.width, canvasSize.height-30);
   }, [editor, updateCanvasSize, canvasSize]);
 
   const addComponent = (Component) => {
@@ -168,20 +169,7 @@ const Sketchbook = () => {
     editor.canvas.renderAll();
   };
 
-  const startDrawing = () => {
-    if (editor) {
-      editor.canvas.isDrawingMode = true;
-      editor.canvas.freeDrawingBrush = new fabric.PencilBrush(editor.canvas);
-      editor.canvas.freeDrawingBrush.color = 'black'; // Set the drawing color
-      editor.canvas.freeDrawingBrush.width = 3; // Set the drawing width
-    }
-  };
 
-  const stopDrawing = () => {
-    if (editor) {
-      editor.canvas.isDrawingMode = false;
-    }
-  };
 
   const toggleDrawingMode = () => {
     setDrawingMode(!drawingMode);
@@ -203,7 +191,99 @@ const Sketchbook = () => {
   };
 
   
+  
 
+  const getRandomCanvas = async () => {
+    try {
+      // Fetch random canvas SVG from the API
+      const response = await DrawingCanvasApi.getRandomCanvas();
+      const jsonData = response.data;
+      const svgData = JSON.parse(jsonData).canvasData;
+  
+      console.log('API Response:', response);
+      console.log('SVG Data:', svgData);
+  
+      // Check if SVG data is a non-empty string
+      if (typeof svgData === 'string' && svgData.trim() !== '') {
+        // Clear the canvas before loading new content
+        editor.canvas.clear();
+  
+        // Load canvas from SVG data
+        fabric.loadSVGFromString(svgData, (objects, options) => {
+          console.log('Load SVG Callback - objects:', objects, 'options:', options);
+  
+          if (Array.isArray(objects) && objects.length > 0) {
+            fabric.util.enlivenObjects(objects, (enlivenedObjects) => {
+              enlivenedObjects.forEach(object => {
+                // Check if the object has necessary properties and methods
+                if (object && object.type) {
+                  // Customize object properties based on type
+                  switch (object.type) {
+                    case 'rect':
+                      object.fill = object.fill || 'transparent'; // Set default fill
+                      break;
+                    case 'path':
+                      object.stroke = object.stroke || 'black'; // Set default stroke
+                      break;
+                    // Add more cases for other object types as needed
+                    default:
+                      break;
+                  }
+  
+                  // Check if the object has the '_set' method before adding
+                  if (object._set) {
+                    // Add the enlivened object to the canvas
+                    editor.canvas.add(object);
+                  } else {
+                    console.error('Object is missing required methods:', object);
+                  }
+                } else {
+                  console.error('Invalid object:', object);
+                }
+              });
+  
+              // Render all objects on the canvas
+              editor.canvas.renderAll();
+            });
+          } else {
+            console.error('Invalid SVG data format or empty array of objects.');
+          }
+        });
+      } else {
+        console.error('Received empty or invalid SVG data from the API.');
+      }
+    } catch (error) {
+      console.error('Error loading canvas from the database:', error);
+    }
+  };
+  
+  
+  
+  
+  
+  
+  const saveCanvas = async () => {
+    try {
+      if (editor) {
+        // Convert canvas to SVG data
+        const svgData = editor.canvas.toSVG();
+  
+        // Send SVG data to the API for saving
+        await DrawingCanvasApi.saveCanvas({ canvasData: svgData });
+  
+        console.log('Canvas saved successfully!');
+      }
+    } catch (error) {
+      console.error('Error saving canvas:', error);
+    }
+  };
+  
+
+  
+  
+  const clearCanvas = async () => {
+      editor.canvas.clear();
+  }
 
   return (
     <div className='sketchbook-container'>
@@ -217,6 +297,9 @@ const Sketchbook = () => {
         onAddText={addText}
         onAddPenImage={addPenImage}
         onToggleDrawingMode={toggleDrawingMode}
+        onSaveCanvas={saveCanvas}
+        onRandomCanvas={getRandomCanvas}
+        onClearCanvas={clearCanvas}
       />
       <FabricJSCanvas className="sketchbook-canvas" onReady={onReady} />
       <ControlPanel
@@ -227,6 +310,9 @@ const Sketchbook = () => {
         onAddCircle={addCircle}
         onAddPenImage={addPenImage}
         onToggleDrawingMode={toggleDrawingMode}
+        onSaveCanvas={saveCanvas}
+        onRandomCanvas={getRandomCanvas}
+        onClearCanvas={clearCanvas}
       />
     </div>
   );

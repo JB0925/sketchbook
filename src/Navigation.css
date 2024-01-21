@@ -37,23 +37,7 @@
     filter: drop-shadow(10 -10px 20px rgba(0, 0, 0, 0.1));
 }
 
-.button::before {
-    content: '';
-    position: absolute;
-    top: 0px; /* Adjust this value to control the initial position of the backgrounds */
-    right: -100vw;
-    left: -100vw;
-    bottom: -40px;
-    background-image: url('./imgs/PaperTear-2.png'), url('./imgs/lined-paper.png');
-    background-repeat: repeat-x, repeat-x;
-    background-position-y: 5px, 30px; /* Adjust these values to control the position of each background */
-    transform: rotate(0deg);
-    z-index: -1;
-    pointer-events: none;
-    /* clip-path: polygon(20px 0px, 100% 0, 100% 100%, 0 100%);  */
 
-    clip-path: inset(0 0 55% 0);
-}
 
 
 .button:hover {
@@ -73,6 +57,24 @@
 .button.sticky-note {
     background-color: #3498db; /* Blue color */
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
+}
+
+.button.sticky-note::before {
+    content: '';
+    position: absolute;
+    top: 0px; /* Adjust this value to control the initial position of the backgrounds */
+    right: -100vw;
+    left: -100vw;
+    bottom: -40px;
+    background-image: url('./imgs/PaperTear-2.png'), url('./imgs/lined-paper.png');
+    background-repeat: repeat-x, repeat-x;
+    background-position-y: 5px, 30px; /* Adjust these values to control the position of each background */
+    transform: rotate(0deg);
+    z-index: -1;
+    pointer-events: none;
+    /* clip-path: polygon(20px 0px, 100% 0, 100% 100%, 0 100%);  */
+
+    clip-path: inset(0 0 55% 0);
 }
 
 .button.sticky-note:hover {
@@ -95,7 +97,23 @@
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
 
 }
+.button.pencil::before {
+    content: '';
+    position: absolute;
+    top: 0px; /* Adjust this value to control the initial position of the backgrounds */
+    right: -100vw;
+    left: -100vw;
+    bottom: -40px;
+    background-image: url('./imgs/PaperTear-2.png'), url('./imgs/lined-paper.png');
+    background-repeat: repeat-x, repeat-x;
+    background-position-y: 5px, 30px; /* Adjust these values to control the position of each background */
+    transform: rotate(0deg);
+    z-index: -1;
+    pointer-events: none;
+    /* clip-path: polygon(20px 0px, 100% 0, 100% 100%, 0 100%);  */
 
+    clip-path: inset(0 0 55% 0);
+}
 .button.paperclip {
     background-color: #2ecc71; /* Green color */
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
@@ -108,7 +126,23 @@
     padding-bottom: 12px;
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
 }
+.button.paperclip::before {
+    content: '';
+    position: absolute;
+    top: 0px; /* Adjust this value to control the initial position of the backgrounds */
+    right: -100vw;
+    left: -100vw;
+    bottom: -40px;
+    background-image: url('./imgs/PaperTear-2.png'), url('./imgs/lined-paper.png');
+    background-repeat: repeat-x, repeat-x;
+    background-position-y: 5px, 30px; /* Adjust these values to control the position of each background */
+    transform: rotate(0deg);
+    z-index: -1;
+    pointer-events: none;
+    /* clip-path: polygon(20px 0px, 100% 0, 100% 100%, 0 100%);  */
 
+    clip-path: inset(0 0 55% 0);
+}
 .button.eraser {
     background-color: #f39c12; /* Yellow color */
     padding-bottom: 12px;
@@ -122,6 +156,23 @@
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
 }
 
+.button.eraser::before {
+    content: '';
+    position: absolute;
+    top: 0px; /* Adjust this value to control the initial position of the backgrounds */
+    right: -100vw;
+    left: -100vw;
+    bottom: -40px;
+    background-image: url('./imgs/PaperTear-2.png'), url('./imgs/lined-paper.png');
+    background-repeat: repeat-x, repeat-x;
+    background-position-y: 5px, 30px; /* Adjust these values to control the position of each background */
+    transform: rotate(0deg);
+    z-index: -1;
+    pointer-events: none;
+    /* clip-path: polygon(20px 0px, 100% 0, 100% 100%, 0 100%);  */
+
+    clip-path: inset(0 0 55% 0);
+}
 .button.circle {
     background-color: #9b59b6; /* Purple color */
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
@@ -134,6 +185,25 @@
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
 }
 
+.button.circle::before {
+    content: '';
+    position: absolute;
+    top: 0px; /* Adjust this value to control the initial position of the backgrounds */
+    right: -100vw;
+    left: -100vw;
+    bottom: -40px;
+    background-image: url('./imgs/PaperTear-2.png'), url('./imgs/lined-paper.png');
+    background-repeat: repeat-x, repeat-x;
+    background-position-y: 5px, 30px; /* Adjust these values to control the position of each background */
+    transform: rotate(0deg);
+    z-index: -1;
+    pointer-events: none;
+    /* clip-path: polygon(20px 0px, 100% 0, 100% 100%, 0 100%);  */
+
+    clip-path: inset(0 0 55% 0);
+}
+
+
 .button.pen-image {
     background-color: #1abc9c; /* Turquoise color */
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
@@ -145,4 +215,121 @@
     transform: translateY(-10px) rotate(-1deg);
     padding-bottom: 12px;
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
+}
+
+.button.pen-image::before {
+    content: '';
+    position: absolute;
+    top: 0px; /* Adjust this value to control the initial position of the backgrounds */
+    right: -100vw;
+    left: -100vw;
+    bottom: -40px;
+    background-image: url('./imgs/PaperTear-2.png'), url('./imgs/lined-paper.png');
+    background-repeat: repeat-x, repeat-x;
+    background-position-y: 5px, 30px; /* Adjust these values to control the position of each background */
+    transform: rotate(0deg);
+    z-index: -1;
+    pointer-events: none;
+    /* clip-path: polygon(20px 0px, 100% 0, 100% 100%, 0 100%);  */
+
+    clip-path: inset(0 0 55% 0);
+}
+
+
+
+.button.text {
+    background-color: #1abc9c; /* Turquoise color */
+    clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
+
+}
+
+.button.text:hover {
+    background-color: #3cdebe; /* Turquoise color */
+    transform: translateY(-10px) rotate(-1deg);
+    padding-bottom: 12px;
+    clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
+}
+
+.button.text::before {
+    content: '';
+    position: absolute;
+    top: 0px; /* Adjust this value to control the initial position of the backgrounds */
+    right: -100vw;
+    left: -100vw;
+    bottom: -40px;
+    background-image: url('./imgs/PaperTear-2.png'), url('./imgs/lined-paper.png');
+    background-repeat: repeat-x, repeat-x;
+    background-position-y: 5px, 30px; /* Adjust these values to control the position of each background */
+    transform: rotate(0deg);
+    z-index: -1;
+    pointer-events: none;
+    /* clip-path: polygon(20px 0px, 100% 0, 100% 100%, 0 100%);  */
+
+    clip-path: inset(0 0 55% 0);
+}
+
+
+
+.button.square {
+    background-color: #1abc9c; /* Turquoise color */
+    clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
+
+}
+
+.button.square:hover {
+    background-color: #3cdebe; /* Turquoise color */
+    transform: translateY(-10px) rotate(-1deg);
+    padding-bottom: 12px;
+    clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
+}
+
+.button.square::before {
+    content: '';
+    position: absolute;
+    top: 0px; /* Adjust this value to control the initial position of the backgrounds */
+    right: -100vw;
+    left: -100vw;
+    bottom: -40px;
+    background-image: url('./imgs/PaperTear-2.png'), url('./imgs/lined-paper.png');
+    background-repeat: repeat-x, repeat-x;
+    background-position-y: 5px, 30px; /* Adjust these values to control the position of each background */
+    transform: rotate(0deg);
+    z-index: -1;
+    pointer-events: none;
+    /* clip-path: polygon(20px 0px, 100% 0, 100% 100%, 0 100%);  */
+
+    clip-path: inset(0 0 55% 0);
+}
+
+
+
+.button.toggle-drawing {
+    background-color: #1abc9c; /* Turquoise color */
+    clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
+
+}
+
+.button.toggle-drawing:hover {
+    background-color: #3cdebe; /* Turquoise color */
+    transform: translateY(-10px) rotate(-1deg);
+    padding-bottom: 12px;
+    clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
+}
+
+.button.button.toggle-drawing::before {
+    content: '';
+    position: absolute;
+    top: 0px; /* Adjust this value to control the initial position of the backgrounds */
+    right: -100vw;
+    left: -100vw;
+    bottom: -40px;
+    background-image: url('./imgs/PaperTear-2.png'), url('./imgs/lined-paper.png');
+    background-repeat: repeat-x, repeat-x;
+    background-position-y: 5px, 30px; /* Adjust these values to control the position of each background */
+    transform: rotate(0deg);
+    z-index: -1;
+    pointer-events: none;
+    /* clip-path: polygon(20px 0px, 100% 0, 100% 100%, 0 100%);  */
+
+    clip-path: inset(0 0 55% 0);
 }

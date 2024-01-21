@@ -25,6 +25,57 @@
   
 
   .button {
+
+  }
+  /*
+  .button:hover {
+    background-color: #45a049;
+    transform: translateY(5px); 
+  }
+  
+  .button:active {
+    transform: translateY(0); 
+  }
+  */
+  .button.save {
+    background-color: #3498db; /* Blue color */
+    position: relative;
+    z-index: 1; /* Place buttons above the ::before pseudo-element */
+    padding: 8px 8px 8px 8px; /*t l b r */
+    font-size: 14px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transform: translateY(-12px);
+    transition: transform 0.3s, background-color 0.3s;
+
+  }
+  .button.save:hover {
+    background-color: #45A9ec; /* Blue color */
+    transform: translateY(5px) rotate(1deg);
+  }
+
+  .button.save::before {
+    content: '';
+    position: absolute;
+    top: -20px; /* Adjust this value to control the initial position of the backgrounds */
+    right: -100vw;
+    left: -100vw;
+    bottom: -80px;
+    background-image: url('./imgs/PaperTear.png'), url('./imgs/lined-paper.png');
+    background-repeat: repeat-x, repeat-x;
+    background-position-y: 5px, 130px; /* Adjust these values to control the position of each background */
+    transform: rotate(0deg);
+    z-index: -1;
+    pointer-events: none;
+    /* clip-path: polygon(20px 0px, 100% 0, 100% 100%, 0 100%);  */
+
+    clip-path: inset(0 0 55% 0);
+}
+  
+  .button.random {
+    background-color: #e74c3c; /* Red color */
     position: relative;
     z-index: 1; /* Place buttons above the ::before pseudo-element */
     padding: 8px 8px 8px 8px; /*t l b r */
@@ -36,64 +87,63 @@
     transform: translateY(-12px);
     transition: transform 0.3s, background-color 0.3s;
   }
-  
-  .button:hover {
-    background-color: #45a049;
-    transform: translateY(5px); /* Adjust the amount of pull-up */
-  }
-  
-  .button:active {
-    transform: translateY(0); /* Bring the button back to its original position on click */
-  }
-  
-  /* Define additional styles for each button individually */
-  
-  .button.sticky-note {
-    background-color: #3498db; /* Blue color */
-
-  }
-  .button.sticky-note:hover {
-    background-color: #45A9ec; /* Blue color */
-    transform: translateY(10px) rotate(5deg);
-  }
-  
-  .button.pencil {
-    background-color: #e74c3c; /* Red color */
-  }
-  .button.pencil:hover {
+  .button.random:hover {
     background-color: #f85d4d; /* Red color */
-    transform: translateY(10px) rotate(5deg);
+    transform: translateY(5px) rotate(1deg);
   }
   
-  .button.paperclip {
-    background-color: #2ecc71; /* Green color */
-  }
-  .button.paperclip:hover {
-    background-color: #3fdd82; /* Green color */
-    transform: translateY(10px) rotate(5deg);
-  }
-  
-  .button.eraser {
-    background-color: #f39c12; /* Yellow color */
-  }
-  .button.eraser:hover {
-    background-color: #f4ad23; /* Yellow color */
-    transform: translateY(10px) rotate(5deg);
-  }
-  
-  .button.circle {
-    background-color: #9b59b6; /* Purple color */
-  }
-  
-  .button.circle:hover {
-    background-color: #ac6ac7; /* Purple color */
-    transform: translateY(10px) rotate(5deg);
-  }
 
-  .button.pen-image {
-    background-color: #1abc9c; /* Turquoise color */
+  .button.random::before {
+    content: '';
+    position: absolute;
+    top: -20px; /* Adjust this value to control the initial position of the backgrounds */
+    right: -100vw;
+    left: -100vw;
+    bottom: -80px;
+    background-image: url('./imgs/PaperTear.png'), url('./imgs/lined-paper.png');
+    background-repeat: repeat-x, repeat-x;
+    background-position-y: 5px, 130px; /* Adjust these values to control the position of each background */
+    transform: rotate(0deg);
+    z-index: -1;
+    pointer-events: none;
+    /* clip-path: polygon(20px 0px, 100% 0, 100% 100%, 0 100%);  */
+
+    clip-path: inset(0 0 55% 0);
+}
+
+  .button.clear {
+    background-color: #2ecc71; /* Green color */
+    position: relative;
+    z-index: 1; /* Place buttons above the ::before pseudo-element */
+    padding: 8px 8px 8px 8px; /*t l b r */
+    font-size: 14px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transform: translateY(-12px);
+    transition: transform 0.3s, background-color 0.3s;
   }
-  .button.pen-image:hover {
-    background-color: #3cdebe; /* Turquoise color */
-    transform: translateY(10px) rotate(5deg);
+  .button.clear:hover {
+    background-color: #3fdd82; /* Green color */
+    transform: translateY(5px) rotate(1deg);
   }
+  
+
+  .button.clear::before {
+    content: '';
+    position: absolute;
+    top: -20px; /* Adjust this value to control the initial position of the backgrounds */
+    right: -100vw;
+    left: -100vw;
+    bottom: -80px;
+    background-image: url('./imgs/PaperTear.png'), url('./imgs/lined-paper.png');
+    background-repeat: repeat-x, repeat-x;
+    background-position-y: 5px, 130px; /* Adjust these values to control the position of each background */
+    transform: rotate(0deg);
+    z-index: -1;
+    pointer-events: none;
+    /* clip-path: polygon(20px 0px, 100% 0, 100% 100%, 0 100%);  */
+
+    clip-path: inset(0 0 55% 0);
+}

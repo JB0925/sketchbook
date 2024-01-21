@@ -2,7 +2,7 @@
 import React from 'react';
 import './Navigation.css';
 
-const Navigation = ({ onAddStickyNote, onAddPencil, onAddPaperclip, onAddEraser, onAddCircle, onAddSquare, onAddText, onAddPenImage, onToggleDrawingMode, }) => {
+const Navigation = ({ onAddStickyNote, onAddPencil, onAddPaperclip, onAddEraser, onAddCircle, onAddSquare, onAddText, onAddPenImage, onToggleDrawingMode, onSaveCanvas, onRandomCanvas, onClearCanvas  }) => {
   return (
     <div className="navigation-container">
       <button className="button sticky-note" onClick={onAddStickyNote}>Add Sticky Note</button>
@@ -13,9 +13,10 @@ const Navigation = ({ onAddStickyNote, onAddPencil, onAddPaperclip, onAddEraser,
       <button className="button circle" onClick={onAddCircle}>Add Circle</button>
       <button className="button square" onClick={onAddSquare}>Add Square</button>
       <button className="button pen-image" onClick={onAddPenImage}>Add Pen Image</button>
-      <button className="button toggle-drawing" onClick={onToggleDrawingMode}>
-        Toggle Drawing Mode
-      </button>
+      <button className="button toggle-drawing" onClick={onToggleDrawingMode}> Toggle Drawing Mode </button>
+      {/* <button className="button save" onClick={onSaveCanvas}> Save Canvas </button>
+      <button className="button random" onClick={onRandomCanvas}> Random Canvas </button>
+      <button className="button clear" onClick={onClearCanvas}> Clear Canvas </button> */}
     </div>
   );
 };
