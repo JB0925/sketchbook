@@ -69,8 +69,7 @@
     background-image: url('./imgs/PaperTear-2.png'), url('./imgs/lined-paper.png');
     background-repeat: repeat-x, repeat-x;
     background-position-y: 5px, 30px; /* Adjust these values to control the position of each background */
-    transform: rotate(0deg);
-    z-index: -1;
+    transform: rotate(0deg);z-index: -1;
     pointer-events: none;
     /* clip-path: polygon(20px 0px, 100% 0, 100% 100%, 0 100%);  */
 
@@ -238,13 +237,13 @@
 
 
 .button.text {
-    background-color: #1abc9c; /* Turquoise color */
+    background-color: #3498db; /* Turquoise color */
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
 
 }
 
 .button.text:hover {
-    background-color: #3cdebe; /* Turquoise color */
+    background-color: #56bafd;/* Turquoise color */
     transform: translateY(-10px) rotate(-1deg);
     padding-bottom: 12px;
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
@@ -271,13 +270,13 @@
 
 
 .button.square {
-    background-color: #1abc9c; /* Turquoise color */
+    background-color: #b6598b;
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
 
 }
 
 .button.square:hover {
-    background-color: #3cdebe; /* Turquoise color */
+    background-color: #d87bad;
     transform: translateY(-10px) rotate(-1deg);
     padding-bottom: 12px;
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
@@ -304,13 +303,13 @@
 
 
 .button.toggle-drawing {
-    background-color: #1abc9c; /* Turquoise color */
+    background-color: #55bc1a; /* Turquoise color */
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 
 
 }
 
 .button.toggle-drawing:hover {
-    background-color: #3cdebe; /* Turquoise color */
+    background-color: #77de3c; /* Turquoise color */
     transform: translateY(-10px) rotate(-1deg);
     padding-bottom: 12px;
     clip-path: polygon(-500px 0px, 10000% 0, 10000% 10000%, 0 10000%); 

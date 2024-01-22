@@ -2,7 +2,7 @@
 import React from 'react';
 import './ControlPanel.css';
 
-const ControlPanel = ({ onAddStickyNote, onAddPencil, onAddPaperclip, onAddEraser, onAddCircle, onAddSquare, onAddText, onAddPenImage, onToggleDrawingMode, onSaveCanvas, onRandomCanvas, onClearCanvas  }) => {
+const ControlPanel = ({ onAddStickyNote, onAddPencil, onAddPaperclip, onAddEraser, onAddCircle, onAddSquare, onAddText, onAddPenImage, onToggleDrawingMode, onSaveCanvas, onExportCanvas, onRandomCanvas, onClearCanvas  }) => {
   return (
     <div className="controlpanel-container">
       {/* <button className="button sticky-note" onClick={onAddStickyNote}>Add Sticky Note</button>
@@ -17,6 +17,7 @@ const ControlPanel = ({ onAddStickyNote, onAddPencil, onAddPaperclip, onAddErase
       <button className="button save" onClick={onSaveCanvas}> Save Canvas </button>
       <button className="button random" onClick={onRandomCanvas}> Random Canvas </button>
       <button className="button clear" onClick={onClearCanvas}> Clear Canvas </button>
+      <button className="button export" onClick={onExportCanvas}> Export Canvas </button>
     </div>
   );
 };

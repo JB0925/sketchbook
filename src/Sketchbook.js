@@ -1,18 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import ReactDOM from 'react-dom';
 
 import { useParams } from 'react-router-dom';
 import { FabricJSCanvas, useFabricJSEditor } from 'fabricjs-react';
 import Navigation from './Navigation';
 import StickyNote from './StickyNote';
-import Pencil from './Pencil';
-import Eraser from './Eraser';
-import PaperClip from './PaperClip';
+
+// import Pencil from './Pencil';
+// import Eraser from './Eraser';
+// import PaperClip from './PaperClip';
+
 import ControlPanel from './ControlPanel';
 import { fabric } from 'fabric';
 import imgPencil from './imgs/Pencil.png';
 import imgPaperClip from './imgs/Paperclip.png';
 import imgEraser from './imgs/Eraser.png';
 import DrawingCanvasApi from './api';
+
+import { gsap, TimelineMax } from 'gsap';
+
 
 // import styled from "styled-components";
 
@@ -23,7 +29,9 @@ import './Sketchbook.css';
 const Sketchbook = () => {
   const [canvasSize, setCanvasSize] = useState({ width: window.innerWidth, height: window.innerHeight -100});
   const { editor, onReady } = useFabricJSEditor();
-  const [drawingMode, setDrawingMode] = useState(false); // Add this line
+  const [drawingMode, setDrawingMode] = useState(false); 
+  const [brushSize, setBrushSize] = useState(5);
+  const [brushColor, setBrushColor] = useState('#000000');
 
 
   const updateCanvasSize = useCallback((width, height) => {
@@ -53,14 +61,25 @@ const Sketchbook = () => {
 
   const addComponent = (Component) => {
     console.log(`Adding ${Component.name}...`);
-    
+  
     if (editor) {
-      const fabricComponent = new Component(); // Create an instance of the component
-      editor.canvas.add(fabricComponent);
-      editor.canvas.setActiveObject(fabricComponent);
+      // Create a Fabric.js object based on the React component
+      const fabricObject = new fabric.Rect({
+        width: 100,
+        height: 100,
+        fill: 'red',
+        // Set any other properties as needed
+      });
+  
+      editor.canvas.add(fabricObject);
+      editor.canvas.setActiveObject(fabricObject);
       editor.canvas.renderAll();
     }
   };
+  
+  
+  
+  
   
   const addStickyNote = () => {
     console.log("Adding Sticky Note...");
@@ -73,7 +92,7 @@ const Sketchbook = () => {
     const randomLeft = Math.floor(Math.random() * (window.innerWidth + 200) - 200);
     const randomTop = Math.floor(Math.random() * (window.innerHeight - 30) +30)
     const randomAngle = Math.floor(Math.random() * 360);
-    
+
       fabric.Image.fromURL(imgUrl, (img) => {
         img.set({
 
@@ -96,7 +115,7 @@ const Sketchbook = () => {
           cornerStyle: 'invisible', // Hide corner altogether
           transparentCorners: true, // Ensure transparent corners
           padding: 0, // Remove padding around the object
-          borderDashArray: [3, 3], // Optionally add a dash array to the border (dashed border)
+          borderDashArray: [3, 3], 
      
         });
         editor.canvas.add(img);
@@ -239,7 +258,6 @@ const Sketchbook = () => {
   };
 
 
-
   const toggleDrawingMode = () => {
     setDrawingMode(!drawingMode);
   
@@ -253,11 +271,15 @@ const Sketchbook = () => {
         // If drawing mode was inactive, activate it
         editor.canvas.on('path:created', (options) => {
           const path = options.path;
+          
           path.set({ selectable: false, evented: false });
+          
+          editor.canvas.sendToBack(path);
         });
       }
     }
   };
+  
 
   
   
@@ -278,6 +300,7 @@ const Sketchbook = () => {
         editor.canvas.clear();
   
         // Load canvas from SVG data
+
         fabric.loadSVGFromString(svgData, (objects, options) => {
           console.log('Load SVG Callback - objects:', objects, 'options:', options);
   
@@ -356,8 +379,32 @@ const Sketchbook = () => {
 
 
 
+  const exportCanvas = () => {
+    if (editor) {
+      console.log('Canvas before exporting:', editor.canvas);
+      
+      // Convert canvas to data URL
+      const canvasDataURL = editor.canvas.toDataURL();
+      
+      console.log('Canvas data URL:', canvasDataURL);
+  
+      // Create an anchor element to trigger download
+      const downloadLink = document.createElement('a');
+      downloadLink.href = canvasDataURL;
+      downloadLink.download = 'canvas_image.png';
+  
+      // Trigger a click event to download the image
+      downloadLink.click();
+    }
+  };
+  
+  const onBrushSizeChange = (size) => {
+    setBrushSize(size);
+  };
 
-
+  const onBrushColorChange = (color) => {
+    setBrushColor(color);
+  };
 
   return (
     <div className='sketchbook-container'>
@@ -374,6 +421,10 @@ const Sketchbook = () => {
         onSaveCanvas={saveCanvas}
         onRandomCanvas={getRandomCanvas}
         onClearCanvas={clearCanvas}
+        brushSize={brushSize}
+        brushColor={brushColor}
+        onBrushSizeChange={onBrushSizeChange}
+        onBrushColorChange={onBrushColorChange}
       />
       <FabricJSCanvas className="sketchbook-canvas" onReady={onReady} />
       <ControlPanel
@@ -387,6 +438,7 @@ const Sketchbook = () => {
         onSaveCanvas={saveCanvas}
         onRandomCanvas={getRandomCanvas}
         onClearCanvas={clearCanvas}
+        onExportCanvas={exportCanvas}
       />
     </div>
   );
