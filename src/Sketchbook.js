@@ -32,6 +32,8 @@ const Sketchbook = () => {
   const [drawingMode, setDrawingMode] = useState(false); 
   const [brushSize, setBrushSize] = useState(5);
   const [brushColor, setBrushColor] = useState('#000000');
+  const [savedMessageVisible, setSavedMessageVisible] = useState(false);
+
 
 
   const updateCanvasSize = useCallback((width, height) => {
@@ -362,7 +364,14 @@ const Sketchbook = () => {
   
         // Send SVG data to the API for saving
         await DrawingCanvasApi.saveCanvas({ canvasData: svgData });
-  
+
+        setSavedMessageVisible(true);
+
+        // Hide the message after a delay (e.g., 2 seconds)
+        setTimeout(() => {
+          setSavedMessageVisible(false);
+        }, 2000);
+
         console.log('Canvas saved successfully!');
       }
     } catch (error) {
@@ -407,7 +416,11 @@ const Sketchbook = () => {
   };
 
   return (
+    
     <div className='sketchbook-container'>
+      {/* <div className={`saved-message ${savedMessageVisible ? 'visible' : ''}`}>
+        Canvas Saved!
+      </div> */}
       <Navigation
         onAddStickyNote={addStickyNote}
         onAddPencil={addPencil}
