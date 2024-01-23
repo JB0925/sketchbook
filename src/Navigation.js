@@ -1,24 +1,57 @@
 // Navigation.js
-import React from 'react';
+import React, {useState, useRef, useEffect } from 'react';
 import './Navigation.css';
-import { SketchPicker } from 'react-color'; 
+import { ChromePicker, SketchPicker } from 'react-color'; 
 
 const Navigation = ({ onAddStickyNote, onAddPencil, onAddPaperclip, onAddEraser, onAddCircle, onAddSquare, onAddText, onAddPenImage, onToggleDrawingMode, onSaveCanvas, onRandomCanvas, onClearCanvas, brushSize, brushColor, onBrushSizeChange, onBrushColorChange   }) => {
+  
+  const [colorPickerVisible, setColorPickerVisible] = useState(false);
+  const colorPickerRef = useRef(null);
+
+  useEffect(() => {
+    const handleClick = (event) => {
+      // Close color picker if clicked outside of it
+      if (colorPickerRef.current && !colorPickerRef.current.contains(event.target)) {
+        setColorPickerVisible(false);
+      }
+    };
+
+    // Attach the event listener
+    document.addEventListener('click', handleClick);
+
+    // Detach the event listener on component unmount
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, []);
+
+  const handleColorButtonClick = () => {
+    setColorPickerVisible(!colorPickerVisible);
+  };
+
+  const handleColorChange = (color) => {
+    onBrushColorChange(color.hex);
+  };
+  
   return (
     <div className="navigation-container">
 
-
-      {/* <div>
+      <div className=''>
+      <div>
         <label>Brush Size:</label>
         <input type="range" min="1" max="10" onChange={(e) => onBrushSizeChange(e.target.value)} />
       </div>
-      <div>
+
+      <div className="color-picker-container" ref={colorPickerRef}>
         <label>Brush Color:</label>
-        <SketchPicker
-          color={brushColor}
-          onChangeComplete={(color) => onBrushColorChange(color.hex)}
-        />
-      </div> */}
+        <button className="color-picker-button" onClick={handleColorButtonClick} style={{ backgroundColor: brushColor }}></button>
+        {colorPickerVisible && (
+          <div className="color-picker-popover">
+            <ChromePicker color={brushColor} onChange={handleColorChange} />
+          </div>
+        )}
+      </div>
+      </div>
 
 
       {/* <button className="button sticky-note" onClick={onAddStickyNote}>Add Sticky Note</button> */}

@@ -332,3 +332,15 @@
 
     clip-path: inset(0 0 55% 0);
 }
+
+.brushSize {
+    position:relative;
+    top:-20px;
+}
+
+.color-picker-container {
+    position:absolute;
+    top:20px;
+    left:10px;
+    z-index: 100;
+}

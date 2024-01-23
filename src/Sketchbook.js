@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 
+import { useSpring, animated } from 'react-spring';
+
 import { useParams } from 'react-router-dom';
 import { FabricJSCanvas, useFabricJSEditor } from 'fabricjs-react';
 import Navigation from './Navigation';
@@ -12,6 +14,8 @@ import StickyNote from './StickyNote';
 
 import ControlPanel from './ControlPanel';
 import { fabric } from 'fabric';
+// import FlipPage from './FlipPage'; 
+
 import imgPencil from './imgs/Pencil.png';
 import imgPaperClip from './imgs/Paperclip.png';
 import imgEraser from './imgs/Eraser.png';
@@ -81,7 +85,48 @@ const Sketchbook = () => {
   
   
   
-  
+  useEffect(() => {
+    if (editor) {
+      const canvas = editor.canvas;
+
+      // Check if the device supports pressure events
+      if (window.PointerEvent) {
+        canvas.on('pointerdown', handlePointerDown);
+      } else {
+        console.warn('Pressure sensitivity not supported on this device.');
+      }
+    }
+  }, [editor]);
+
+  const handlePointerDown = (event) => {
+    if (event.pressure) {
+      const initialPressure = event.pressure;
+      let lastPressure = initialPressure;
+
+      editor.canvas.on('pointermove', (event) => {
+        const pressure = event.pressure || lastPressure;
+        const strokeWidth = Math.max(1, pressure * 10); // Adjust as needed
+
+        // Your drawing logic here
+        const path = new fabric.Path(event.absolutePointer, {
+          strokeWidth,
+          stroke: brushColor,
+          fill: brushColor,
+          selectable: false,
+          evented: false,
+        });
+
+        editor.canvas.add(path);
+        lastPressure = pressure;
+      });
+
+      editor.canvas.on('pointerup', () => {
+        editor.canvas.off('pointermove');
+        editor.canvas.off('pointerup');
+      });
+    }
+  };
+
   
   const addStickyNote = () => {
     console.log("Adding Sticky Note...");
@@ -213,7 +258,7 @@ const Sketchbook = () => {
       top: window.innerHeight/2,
 
       radius: 50, 
-      fill: 'blue',
+      fill: brushColor,
       borderColor: 'black',
       cornerColor: 'black'});
     editor.canvas.add(fabricCircle);
@@ -230,7 +275,7 @@ const Sketchbook = () => {
 
       width: 50,
       height: 50,
-      fill: 'red',
+      fill: brushColor,
       borderColor: 'black',
       cornerColor: 'black'
     });
@@ -248,7 +293,7 @@ const Sketchbook = () => {
           left: window.innerWidth/2,
           top: window.innerHeight/2,
 
-      fill: 'black',
+      fill: brushColor,
       fontFamily: 'handwriting',
       borderColor: 'black',
       cornerColor: 'black'
@@ -274,13 +319,19 @@ const Sketchbook = () => {
         editor.canvas.on('path:created', (options) => {
           const path = options.path;
           
-          path.set({ selectable: false, evented: false });
+          path.set({
+            selectable: false,
+            evented: false,
+            strokeWidth: brushSize,
+            stroke: brushColor
+          });
           
           editor.canvas.sendToBack(path);
         });
       }
     }
   };
+  
   
 
   
@@ -439,7 +490,9 @@ const Sketchbook = () => {
         onBrushSizeChange={onBrushSizeChange}
         onBrushColorChange={onBrushColorChange}
       />
+      {/* <FlipPage> */}
       <FabricJSCanvas className="sketchbook-canvas" onReady={onReady} />
+      {/* </FlipPage> */}
       <ControlPanel
         onAddStickyNote={addStickyNote}
         onAddPencil={addPencil}
