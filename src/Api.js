@@ -30,10 +30,31 @@ class DrawingCanvasApi {
     return this.request(`canvas/${canvasId}`);
   }
 
+  /** Get details on a specific canvas by ID. */
+  static async getCanvasById(canvasId) {
+    return this.request(`canvas/${canvasId}`);
+  }
+
   /** Get a random canvas drawing. */
   static async getRandomCanvas() {
     return this.request("random");
   }
+
+  /** share drawing. */
+  static async saveAndShareCanvas(canvasData) {
+    try {
+      const response = await this.request("canvas", { canvasData }, "post");
+      const canvasId = response.id; // Adjust this based on your API response structure
+      console.log('Canvas saved successfully. ID:', canvasId);
+      return canvasId;
+    } catch (error) {
+      console.error('Error saving canvas:', error);
+      throw error;
+    }
+  }
+  
+
 }
+
 
 export default DrawingCanvasApi;

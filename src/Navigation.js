@@ -12,6 +12,7 @@ const Navigation = ({ onAddStickyNote, onAddPencil, onAddPaperclip, onAddEraser,
     const handleClick = (event) => {
       // Close color picker if clicked outside of it
       if (colorPickerRef.current && !colorPickerRef.current.contains(event.target)) {
+  
         setColorPickerVisible(false);
       }
     };
@@ -26,32 +27,40 @@ const Navigation = ({ onAddStickyNote, onAddPencil, onAddPaperclip, onAddEraser,
   }, []);
 
   const handleColorButtonClick = () => {
+    onToggleDrawingMode(false);
     setColorPickerVisible(!colorPickerVisible);
   };
 
   const handleColorChange = (color) => {
+    onToggleDrawingMode(false);
     onBrushColorChange(color.hex);
+  };
+
+  const handleBrushSizeChange = (e) => {
+    onToggleDrawingMode(false);
+    onBrushSizeChange(e.target.value);
   };
   
   return (
     <div className="navigation-container">
 
-      <div className=''>
-      <div>
-        <label>Brush Size:</label>
-        <input type="range" min="1" max="10" onChange={(e) => onBrushSizeChange(e.target.value)} />
-      </div>
+<div className="paint-tool-container">
+<div className="brush-size-container">
+          {/* <label>Brush Size:</label> */}
+          <input type="range" min="1" max="10" onChange={(e) => handleBrushSizeChange(e)} />
+        </div>
 
-      <div className="color-picker-container" ref={colorPickerRef}>
-        <label>Brush Color:</label>
-        <button className="color-picker-button" onClick={handleColorButtonClick} style={{ backgroundColor: brushColor }}></button>
-        {colorPickerVisible && (
-          <div className="color-picker-popover">
-            <ChromePicker color={brushColor} onChange={handleColorChange} />
-          </div>
-        )}
+  <div className="color-picker-container" ref={colorPickerRef}>
+    {/* <label>Brush Color:</label> */}
+    <button className="color-picker-button" onClick={handleColorButtonClick} style={{ backgroundColor: brushColor }}></button>
+    {colorPickerVisible && (
+      <div className="color-picker-popover">
+        <ChromePicker color={brushColor} onChange={handleColorChange} />
       </div>
-      </div>
+    )}
+  </div>
+</div>
+
 
 
       {/* <button className="button sticky-note" onClick={onAddStickyNote}>Add Sticky Note</button> */}

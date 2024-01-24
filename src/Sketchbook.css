@@ -1,7 +1,7 @@
 /* Sketchbook.css */
 
 .sketchbook-container {
-
+overflow:hidden;
   }
   
 
@@ -27,3 +27,16 @@
     z-index: 10;
   }
   
+
+
+
+  .saved-message {
+    /* visibility: hidden; */
+    position: absolute;
+    padding: 5px;
+    background-color: green;
+    color: lawngreen;
+    margin: auto;
+    left:50%;
+    transition: 3ms;
+  }
