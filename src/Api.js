@@ -45,7 +45,7 @@ class DrawingCanvasApi {
   static async saveAndShareCanvas(canvasData) {
     try {
       const response = await this.request("canvas", { canvasData }, "post");
-      const canvasId = response.id; // Adjust this based on your API response structure
+      const canvasId = response.id; 
       console.log('Canvas saved successfully. ID:', canvasId);
       return canvasId;
     } catch (error) {
