@@ -17,7 +17,7 @@ import { fabric } from "fabric";
 // import FlipPage from './FlipPage';
 
 import imgPencil from "./imgs/Pencil.png";
-import imgPaperClip from "./imgs/Paperclip.png";
+import imgPaperClip from "./imgs/paperclip.png";
 import imgEraser from "./imgs/Eraser.png";
 import DrawingCanvasApi from "./Api";
 
