@@ -19,7 +19,7 @@ import { fabric } from "fabric";
 import imgPencil from "./imgs/Pencil.png";
 import imgPaperClip from "./imgs/Paperclip.png";
 import imgEraser from "./imgs/Eraser.png";
-import DrawingCanvasApi from "./api";
+import DrawingCanvasApi from "./Api";
 
 import { gsap, TimelineMax } from "gsap";
 
